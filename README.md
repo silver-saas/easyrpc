@@ -60,6 +60,7 @@ If one needs a mockable client, the following will suffice:
 
 ```python
 from mockito import when
+import easyrpc
 client = easyrpc.mock_to()
 when(client.context).addTwo(10, 20).thenReturn(30)
 ```
