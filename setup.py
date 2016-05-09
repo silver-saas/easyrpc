@@ -26,7 +26,7 @@ setup(
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     install_requires=[
         'thrift==0.9.3',
-        'thriftplus>=0,<1',
+        'thriftplus==0.0.2',
         ],
     test_suite='tests',
     tests_require=[
