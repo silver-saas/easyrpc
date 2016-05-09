@@ -1,0 +1,37 @@
+language: python
+
+python:
+- "2.7"
+
+# The secure env variables are: GEMFURY_KEY
+env:
+  global:
+    - secure: "JBRJoWb2HG2C2L3gsd5GWHuvlkg00HR64BQONUgNkyt8w+PYcIfz1czRQ9T48j/+4/WlIa/8Shp5b3s672v3la/i9K2jslT55CcbRT8/A+IYjbKeh+d55D6c+D2Xk/mpfupUWsiDrJUVmCZrMGpFNJG7jIGj0JQlRM8fD/NRTsgM6dirrsEZev5xaQigg0mHifoqaOwbMbkQ0mydyd+zvPGVW0uAYF/fecocL7vdKAeasqWYKNfQ40KX4f2+OEb4LwfL0eykV3GQ/ENeqFjoxHQ9m/nwOLAFfoQ0SEGjD4dLtkciKXc55bBXQBy3cZu3EJqN4aL6kEgrOL6rmAF4yD3+KJ+WlTOEVKGH+XUCtDeSs2HVCprm6yb0u6cq5xfOVmV4p714Q+3+hLIHbU4vp4MGhxxZ8Jztxu+0AvjXt80a/UnKCqnGJtNHywwwaj5mE85vmFVw9tT4oL3eT6gNrUFAKu6PekTS/7xaSAgHxMHLt8aKJQtgyv0oCDm0mpUHtIT4uiKyO+QST4rOyfeIx6QPWowFcbMOqewPOXmpthUFQAhjwdYrgqGAYdsipQbw3EI5hFPEqcH0FUnU+emPm3FE6a1HncmZW+PuViQy+TtJs0d0iC30nu6zYO3fJ9rQmUYdKhT810urLyF9yisQymR6vVH1eb52KKUZTmSc3nQ="
+
+addons:
+  apt:
+    packages:
+    - thrift
+    - tree
+
+install: 
+  - pip install coveralls
+  - pip install coverage
+  - pip install -r requirements.txt --extra-index-url https://pypi.fury.io/$GEMFURY_KEY/silver-saas/
+
+before_install:
+  - mkdir thriftgen
+  - thriftplus --gen py --base=src --out=thriftgen
+  - tree
+
+script: coverage run --source=easyrpc --module unittest discover --verbose
+
+after_success:
+  - coveralls
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bin/togemfury.sh
+
+sudo: false
