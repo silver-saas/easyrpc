@@ -15,10 +15,9 @@ addons:
       - tree
 
 install: 
-  - echo $GEMFURY_KEY
   - pip install coveralls
   - pip install coverage
-  - pip install --extra-index-url https://pypi.fury.io/${GEMFURY_KEY}/silver-saas/ -r requirements.txt
+  - pip install --extra-index-url "https://pypi.fury.io/$GEMFURY_KEY/silver-saas/" -r requirements.txt
 
 before_script:
   - mkdir thriftgen
