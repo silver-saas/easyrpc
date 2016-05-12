@@ -27,13 +27,13 @@ setup(
     install_requires=[
         'thrift==0.9.3',
         'thriftplus',
-        ],
-    test_suite='tests',
-    tests_require=[
+        # For tests
         'coverage==4.1b1',
         'portpicker==1.1.0',
         'thriftgen_easyrpc_tests_adder==0.0.0',
-    ],
+        ],
+    test_suite='tests',
+    tests_require=[],
     include_package_data=True,
     zip_safe=False
 )
