@@ -14,12 +14,14 @@ addonse:
       - thrift-compiler
       - tree
 
-install:  bin/setup.sh
-
-before_script:
+install:
+  - pip install coveralls
+  - pip install coverage
+  - pip install --extra-index-url https://pypi.fury.io/$GEMFURY_KEY/silver-saas/ thriftplus
   - mkdir thriftgen
   - thriftplus --gen py --base=src --out=thriftgen
   - tree
+  - pip install -r requirements.txt
 
 script: coverage run --source=easyrpc --module unittest discover --verbose
 
