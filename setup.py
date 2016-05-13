@@ -26,11 +26,11 @@ setup(
     py_modules=[splitext(basename(path))[0] for path in glob('src/*.py')],
     install_requires=[
         'thrift==0.9.3',
-        'thriftplus',
+        'thriftplus==0.0.3',
         # For tests
         'coverage==4.1b1',
         'portpicker==1.1.0',
-        'thriftgen_easyrpc_tests_adder==0.0.0',
+        'thriftgen_easyrpc_tests_adder',
         ],
     test_suite='tests',
     tests_require=[],
